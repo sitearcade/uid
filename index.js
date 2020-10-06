@@ -66,6 +66,7 @@ const createGenerator = (len) => new Id(len);
 const id = createGenerator();
 
 module.exports = {
+  hash,
   createGenerator,
   isId: id.isId.bind(id),
   getNanoId: id.getNanoId.bind(id),

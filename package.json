@@ -1,6 +1,6 @@
 {
   "name": "@sitearcade/uid",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "SiteArcade's various UID generators and utils.",
   "license": "MIT",
   "homepage": "https://www.sitearcade.com",

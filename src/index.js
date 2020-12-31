@@ -63,17 +63,14 @@ class Id {
   }
 }
 
-// export
-
 const createGenerator = (len) => new Id(len);
+
+// export
 
 const id = createGenerator();
 
-module.exports = {
-  hash,
-  createGenerator,
-  isId: id.isId.bind(id),
-  getNanoId: id.getNanoId.bind(id),
-  getDateId: id.getDateId.bind(id),
-  getHashId: id.getHashId.bind(id),
-};
+export {hash, createGenerator};
+export const isId = id.isId.bind(id);
+export const getNanoId = id.getNanoId.bind(id);
+export const getDateId = id.getDateId.bind(id);
+export const getHashId = id.getHashId.bind(id);

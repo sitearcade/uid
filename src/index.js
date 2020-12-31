@@ -1,8 +1,8 @@
 // import
 
-const stringify = require('fast-json-stable-stringify');
-const {customAlphabet} = require('nanoid');
-const hash = require('string-hash');
+import stringify from 'fast-json-stable-stringify';
+import {customAlphabet} from 'nanoid';
+import stringHash from 'string-hash';
 
 // vars
 
@@ -17,6 +17,8 @@ const validRx = /^[\dA-Za-z]+$/;
 const dateLen = 7;
 
 // fns
+
+const hash = (v) => stringHash(stringify(v));
 
 const encodeAsChars = (num) => {
   let res = '';
@@ -33,29 +35,31 @@ const encodeAsChars = (num) => {
 // class
 
 class Id {
-  constructor(len) {
-    this.len = parseInt(len) || idLen;
+  #len;
+
+  constructor(len = idLen) {
+    this.#len = parseInt(len);
   }
 
   isId(str) {
-    return str.length === this.len && validRx.test(str);
+    return str.length === this.#len && validRx.test(str);
   }
 
   getNanoId() {
-    return customAlphabet(chars, this.len)();
+    return customAlphabet(chars, this.#len)();
   }
 
   getDateId(dt) {
     return encodeAsChars(dt ? new Date(dt).getTime() : Date.now())
       .padStart(dateLen, '0')
-      .slice(0, this.len)
-      .concat(customAlphabet(chars, this.len - dateLen)());
+      .slice(0, this.#len)
+      .concat(customAlphabet(chars, this.#len - dateLen)());
   }
 
   getHashId(obj) {
-    return encodeAsChars(hash(stringify(obj)))
-      .slice(0, this.len)
-      .padStart(this.len, 0);
+    return encodeAsChars(hash(obj))
+      .slice(0, this.#len)
+      .padStart(this.#len, 0);
   }
 }
 

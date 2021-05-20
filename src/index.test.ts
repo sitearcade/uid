@@ -80,5 +80,6 @@ describe('createGenerator(len)', () => {
     expect(gen.isId(gen.getDateId(new Date()))).toStrictEqual(true);
     expect(gen.isId(gen.getHashId(123))).toStrictEqual(true);
     expect(gen.isId('abc')).toStrictEqual(false);
+    expect(gen.isId('1234567890qwert')).toStrictEqual(true);
   });
 });

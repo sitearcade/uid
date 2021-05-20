@@ -40,8 +40,8 @@ class Id {
   }
 
   isId(v: any) {
-    return typeof v === 'string' && 
-      v.length === this.idLength && 
+    return typeof v === 'string' &&
+      v.length === this.idLength &&
       validRx.test(v);
   }
 
@@ -50,8 +50,6 @@ class Id {
   }
 
   getDateId(dt?: string | number | Date) {
-    const enc = encodeAsChars(dt ? new Date(dt).getTime() : Date.now());
-
     return encodeAsChars(dt ? new Date(dt).getTime() : Date.now())
       .padStart(dateLen, '0')
       .slice(0, this.idLength)
@@ -72,7 +70,16 @@ const createGenerator = (len?: number) => new Id(len);
 const id = createGenerator();
 
 export {hash, createGenerator};
-export const isId: InstanceType<typeof Id>['isId'] = id.isId.bind(id);
-export const getNanoId: InstanceType<typeof Id>['getNanoId'] = id.getNanoId.bind(id);
-export const getDateId: InstanceType<typeof Id>['getDateId'] = id.getDateId.bind(id);
-export const getHashId: InstanceType<typeof Id>['getHashId'] = id.getHashId.bind(id);
+
+export const isId: InstanceType<typeof Id>['isId'] =
+  id.isId.bind(id);
+
+export const getNanoId: InstanceType<typeof Id>['getNanoId'] =
+  id.getNanoId.bind(id);
+
+export const getDateId: InstanceType<typeof Id>['getDateId'] =
+  id.getDateId.bind(id);
+
+export const getHashId: InstanceType<typeof Id>['getHashId'] =
+  id.getHashId.bind(id);
+

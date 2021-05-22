@@ -21,7 +21,6 @@ const hash = (v: any) => stringHash(stringify(v));
 const encodeAsChars = (num: number) => {
   let res = '';
 
-  // eslint-disable-next-line fp/no-loops
   while (num > 0) {
     res = chars[num % charLen] + res;
     num = Math.floor(num / charLen);
@@ -49,7 +48,7 @@ class Id {
     return customAlphabet(chars, this.idLength)();
   }
 
-  getDateId(dt?: string | number | Date) {
+  getDateId(dt?: Date | number | string) {
     return encodeAsChars(dt ? new Date(dt).getTime() : Date.now())
       .padStart(dateLen, '0')
       .slice(0, this.idLength)
